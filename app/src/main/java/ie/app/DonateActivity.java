@@ -65,4 +65,11 @@ public class DonateActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    // handle button pressed
+    public void donateButtonPressed (View view)
+    {
+        Log.v("Donate", "Donate Pressed!");
+    }
+
 }
