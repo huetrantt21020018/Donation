@@ -1,5 +1,6 @@
-package ie.app;
+package ie.app.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -10,14 +11,14 @@ import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.NumberPicker;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import ie.app.R;
 
-public class DonateActivity extends AppCompatActivity {
+public class Donate extends AppCompatActivity {
 
     private Button donateButton;
     private RadioGroup paymentMethod;
@@ -68,16 +69,11 @@ public class DonateActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == android.R.id.home) {
-            onBackPressed();
-            return true;
-        } else if (id == R.id.action_settings) {
-            // Handle settings button click
-            return true;
+        switch (item.getItemId())
+        {
+            case R.id.menuReport : startActivity (new Intent(this, Report.class));
+                break;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
