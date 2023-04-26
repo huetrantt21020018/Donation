@@ -4,13 +4,6 @@
     tools:context="ie.app.activities.Donate">
 
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never"
-        android:onClick="settings" />
-
-    <item
         android:id="@+id/menuReport"
         android:orderInCategory="100"
         android:title="@string/menuReport"
@@ -22,4 +15,11 @@
         android:title="@string/menuDonate"
         app:showAsAction="never"
         android:onClick="donate" />
+    <item
+        android:id="@+id/menuReset"
+        android:orderInCategory="100"
+        android:title="@string/menuReset"
+        app:showAsAction="never"
+        android:onClick="reset"/>
+
 </menu>

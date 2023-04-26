@@ -2,6 +2,7 @@ package ie.app.activities;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
 import android.widget.Button;
@@ -88,5 +89,14 @@ public class Donate extends Base {
             String totalDonatedStr = "$" + totalDonated;
             amountTotal.setText(totalDonatedStr);
         }
+    }
+
+    @Override
+    public void reset(MenuItem item)
+    {
+        // Your implementation goes here
+        totalDonated = 0;
+        progressBar.setProgress(totalDonated);
+
     }
 }
