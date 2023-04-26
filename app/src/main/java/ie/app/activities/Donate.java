@@ -100,9 +100,12 @@ public class Donate extends Base {
         if (donatedAmount > 0)
         {
             newDonation(new Donation(donatedAmount, method));
+
+            totalDonated += donatedAmount;
             progressBar.setProgress(totalDonated);
+
             String totalDonatedStr = "$" + totalDonated;
             amountTotal.setText(totalDonatedStr);
         }
     }
-}
+}1
