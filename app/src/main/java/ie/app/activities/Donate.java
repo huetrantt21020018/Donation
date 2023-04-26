@@ -108,4 +108,4 @@ public class Donate extends Base {
             amountTotal.setText(totalDonatedStr);
         }
     }
-}1
+}
