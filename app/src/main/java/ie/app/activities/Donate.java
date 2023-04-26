@@ -122,7 +122,7 @@ public class Donate extends Base {
         }
         if (donatedAmount > 0)
         {
-            app.newDonation(new Donation(donatedAmount, method));
+            app.newDonation(new Donation(donatedAmount, method, 0));
             progressBar.setProgress(app.totalDonated);
 
             String totalDonatedStr = "$" + app.totalDonated;
