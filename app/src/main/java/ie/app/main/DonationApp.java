@@ -25,6 +25,7 @@ public class DonationApp extends Application
         {
             Toast.makeText(this, "Target Exceeded!", Toast.LENGTH_SHORT).show();
         }
+
         return targetAchieved;
     }
     @Override

@@ -28,7 +28,6 @@ public class Donate extends Base {
     private NumberPicker amountPicker;
     private EditText amountText;
     private TextView amountTotal;
-    private int totalDonated = 0;
 
 
     @Override
@@ -82,11 +81,9 @@ public class Donate extends Base {
         if (donatedAmount > 0)
         {
             app.newDonation(new Donation(donatedAmount, method));
+            progressBar.setProgress(app.totalDonated);
 
-            totalDonated += donatedAmount;
-            progressBar.setProgress(totalDonated);
-
-            String totalDonatedStr = "$" + totalDonated;
+            String totalDonatedStr = "$" + app.totalDonated;
             amountTotal.setText(totalDonatedStr);
         }
     }
@@ -94,9 +91,9 @@ public class Donate extends Base {
     @Override
     public void reset(MenuItem item)
     {
-        // Your implementation goes here
-        totalDonated = 0;
-        progressBar.setProgress(totalDonated);
-
+        app.dbManager.reset();
+        app.totalDonated = 0;
+        amountTotal.setText("$" + app.totalDonated);
+        progressBar.setProgress(app.totalDonated);
     }
 }
