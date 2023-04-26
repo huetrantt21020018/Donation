@@ -13,6 +13,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+
 import ie.app.R;
 import ie.app.models.Donation;
 
@@ -35,7 +38,7 @@ public class Donate extends Base {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-/*
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +48,6 @@ public class Donate extends Base {
                         .setAction("Action", null).show();
             }
         });
-*/
 
         donateButton = (Button) findViewById(R.id.donateButton);
         if (donateButton != null)
