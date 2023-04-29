@@ -11,7 +11,7 @@ import java.util.List;
 
 import ie.app.R;
 import ie.app.adapters.DonationAdapter;
-import ie.app.api.DonationApi;
+import ie.app.api.FirebaseAPI;
 import ie.app.models.Donation;
 
 
@@ -37,7 +37,7 @@ public class Report extends Base
         protected List<Donation> doInBackground(String... params) {
             try {
                 Log.v("donate", "Donation App Getting All Donations");
-                return (List<Donation>) DonationApi.getAll((String) params[0]);
+                return (List<Donation>) FirebaseAPI.getAll();
             }
             catch (Exception e) {
                 Log.v("donate", "ERROR : " + e);
