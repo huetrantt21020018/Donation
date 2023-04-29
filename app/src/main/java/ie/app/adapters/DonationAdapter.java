@@ -32,7 +32,7 @@ public class DonationAdapter extends ArrayAdapter<Donation>
         TextView amountView = (TextView) view.findViewById(R.id.row_amount);
         TextView methodView = (TextView) view.findViewById(R.id.row_method);
         amountView.setText("$" + donation.amount);
-        methodView.setText(donation.method);
+        methodView.setText(donation.paymenttype);
         return view;
     }
     @Override
