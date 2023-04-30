@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import ie.app.R;
 import ie.app.main.DonationApp;
+
 public class Base extends AppCompatActivity {
     public DonationApp app;
 
@@ -15,42 +16,36 @@ public class Base extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         app = (DonationApp) getApplication();
-        app.dbManager.open();
-        app.dbManager.setTotalDonated(this);
+
+        //app.dbManager.open();
+        //app.dbManager.setTotalDonated(this);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        app.dbManager.close();
+        //app.dbManager.close();
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_donate, menu);
         return true;
     }
 
     @Override
-    public boolean onPrepareOptionsMenu (Menu menu){
+    public boolean onPrepareOptionsMenu (Menu menu) {
         super.onPrepareOptionsMenu(menu);
         MenuItem report = menu.findItem(R.id.menuReport);
         MenuItem donate = menu.findItem(R.id.menuDonate);
         MenuItem reset = menu.findItem(R.id.menuReset);
-        if(app.dbManager.getAll().isEmpty())
-        {
-            report.setEnabled(false);
-            reset.setEnabled(false);
-        }
-        else {
-            report.setEnabled(true);
-            reset.setEnabled(true);
-        }
-        if(this instanceof Donate){
+
+        report.setEnabled(true);
+        reset.setEnabled(true);
+
+        if(this instanceof Donate) {
             donate.setVisible(false);
-            if(!app.dbManager.getAll().isEmpty())
-            {
+            if(!app.donations.isEmpty()) {
                 report.setVisible(true);
                 reset.setEnabled(true);
             }
