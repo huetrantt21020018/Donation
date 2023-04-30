@@ -2,6 +2,7 @@ package ie.app.activities;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,7 @@ import android.widget.NumberPicker;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -116,6 +118,7 @@ public class Donate extends Base {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donate);
 
+//        progressBar.setProgress(app.totalDonated);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -172,15 +175,23 @@ public class Donate extends Base {
         }
     }
 
-    @Override
-    public void reset(MenuItem item)
-    {
-        //app.dbManager.reset();
-        app.donations.clear();
-        app.totalDonated = 0;
-        amountTotal.setText("$" + app.totalDonated);
-        progressBar.setProgress(app.totalDonated);
+    public void reset(MenuItem item) {
+        new AlertDialog.Builder(this)
+                .setTitle("Reset Donations")
+                .setMessage("Are you sure you want to reset all donations?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Reset donations
+                        app.donations.clear();
+                        app.totalDonated = 0;
+                        amountTotal.setText("$" + app.totalDonated);
+                        progressBar.setProgress(app.totalDonated);
 
-        new ResetTask(Donate.this).execute("/donations");
+                        new ResetTask(Donate.this).execute("/donations");
+                    }
+                })
+                .setNegativeButton(android.R.string.no, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 }

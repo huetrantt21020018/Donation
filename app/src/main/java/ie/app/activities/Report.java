@@ -21,6 +21,10 @@ import android.widget.Toast;
 
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
+
 import java.util.List;
 import ie.app.R;
 import ie.app.api.FirebaseAPI;
@@ -68,6 +72,7 @@ public class Report extends Base implements OnItemClickListener, OnClickListener
         builder.setCancelable(false);
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
+                app.totalDonated -= donation.amount;
                 new DeleteTask(Report.this).execute("/donations", donation._id);
             }
         }).setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -94,13 +99,18 @@ public class Report extends Base implements OnItemClickListener, OnClickListener
         @Override
         protected List<Donation> doInBackground(String... params) {
             try {
-                return (List<Donation>) FirebaseAPI.getAll((String) params[0]);
+                Task<List<Donation>> task = FirebaseAPI.getAll((String) params[0]);
+                List<Donation> ret = Tasks.await(task); // Sử dụng Tasks.await để đợi cho việc lấy dữ liệu hoàn thành
+                app.totalDonated = 0;
+                for(Donation donation : ret) app.totalDonated += donation.amount;
+                return ret;
             } catch (Exception e) {
                 Log.v("ASYNC", "ERROR : " + e);
                 e.printStackTrace();
             }
             return null;
         }
+
         @Override
         protected void onPostExecute(List<Donation> result) {
             super.onPostExecute(result);

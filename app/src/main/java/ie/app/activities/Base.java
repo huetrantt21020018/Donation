@@ -15,6 +15,7 @@ public class Base extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         app = (DonationApp) getApplication();
+
         //app.dbManager.open();
         //app.dbManager.setTotalDonated(this);
     }

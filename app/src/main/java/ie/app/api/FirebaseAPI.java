@@ -4,6 +4,8 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.TaskCompletionSource;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,27 +24,30 @@ public class FirebaseAPI {
     static FirebaseDatabase database;
     static final String instance = "https://donation-ce0ba-default-rtdb.asia-southeast1.firebasedatabase.app";
 
-    public static List<Donation> getAll(String call) {
+    public static Task<List<Donation>> getAll(String call) {
         database = FirebaseDatabase.getInstance(instance);
         DatabaseReference ref = database.getReference(call);
 
-        List<Donation> ret = new ArrayList<Donation>();
+        TaskCompletionSource<List<Donation>> taskCompletionSource = new TaskCompletionSource<>();
+
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Donation> ret = new ArrayList<Donation>();
                 for (DataSnapshot childSnapshot : snapshot.getChildren()) {
                     Donation data = childSnapshot.getValue(Donation.class);
                     ret.add(data);
                 }
+                taskCompletionSource.setResult(ret);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // Handle errors
+                taskCompletionSource.setException(error.toException());
             }
         });
 
-        return ret;
+        return taskCompletionSource.getTask();
     }
 
     public static Donation get(String call, String donationId) {
