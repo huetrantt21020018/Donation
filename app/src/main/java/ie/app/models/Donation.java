@@ -1,22 +1,28 @@
 package ie.app.models;
 
-public class Donation
-{
-    public int id;
+public class Donation {
+    public String _id;
     public int amount;
-    public String method;
-    public Donation (int amount, String method)
-    {
+    public String paymenttype;
+    public int upvotes;
+
+    public static int id = 0;
+
+    public Donation (int amount, String method, int upvotes) {
+        this._id = "donation" + (++id);
         this.amount = amount;
-        this.method = method;
+        this.paymenttype = method;
+        this.upvotes = upvotes;
     }
-    public Donation ()
-    {
+
+    public Donation () {
         this.amount = 0;
-        this.method = "";
+        this.paymenttype = "";
+        this.upvotes = 0;
     }
+
     public String toString()
     {
-        return id + ", " + amount + ", " + method;
+        return _id + ", " + amount + ", " + paymenttype + ", " + upvotes;
     }
 }

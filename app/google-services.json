@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1024494309263",
+    "project_id": "donation-ce0ba",
+    "storage_bucket": "donation-ce0ba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1024494309263:android:6cd387bec9ca735ae6c5fa",
+        "android_client_info": {
+          "package_name": "ie.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1024494309263-7d1e133knuo6avqo6135nqtf4brtsehe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKl665r7vrOsGlyBMRJWov-qW6e5KF4qQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1024494309263-7d1e133knuo6avqo6135nqtf4brtsehe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
