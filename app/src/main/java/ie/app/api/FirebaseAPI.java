@@ -20,9 +20,10 @@ import ie.app.models.Donation;
 public class FirebaseAPI {
 
     static FirebaseDatabase database;
+    static final String instance = "https://donation-ce0ba-default-rtdb.asia-southeast1.firebasedatabase.app";
 
     public static List<Donation> getAll(String call) {
-        database = FirebaseDatabase.getInstance();
+        database = FirebaseDatabase.getInstance(instance);
         DatabaseReference ref = database.getReference(call);
 
         List<Donation> ret = new ArrayList<Donation>();
@@ -45,7 +46,7 @@ public class FirebaseAPI {
     }
 
     public static Donation get(String call, String donationId) {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(call).child(donationId);
+        DatabaseReference ref = FirebaseDatabase.getInstance(instance).getReference(call).child(donationId);
 
         DataSnapshot dataSnapshot = null;
         try {
@@ -64,8 +65,16 @@ public class FirebaseAPI {
         }
     }
 
+    public static  String insert(String call, Donation donation) {
+        DatabaseReference donationsRef = FirebaseDatabase.getInstance(instance).getReference(call);
+        String donationKey = donation._id;
+        Log.v("Firebase", "donationKey:" + donationKey );
+        donationsRef.child(donationKey).setValue(donation);
+        return "added to clould";
+    }
+
     public static String delete(String call, String donationId) {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(call).child(donationId);
+        DatabaseReference ref = FirebaseDatabase.getInstance(instance).getReference(call).child(donationId);
         final String[] result = new String[1];
         ref.removeValue(new DatabaseReference.CompletionListener() {
             @Override
@@ -85,7 +94,7 @@ public class FirebaseAPI {
     }
 
     public static String deleteAll(String call) {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(call);
+        DatabaseReference ref = FirebaseDatabase.getInstance(instance).getReference(call);
         final String[] result = new String[1];
 
         ref.removeValue(new DatabaseReference.CompletionListener() {

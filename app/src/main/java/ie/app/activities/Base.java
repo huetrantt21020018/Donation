@@ -38,15 +38,10 @@ public class Base extends AppCompatActivity {
         MenuItem report = menu.findItem(R.id.menuReport);
         MenuItem donate = menu.findItem(R.id.menuDonate);
         MenuItem reset = menu.findItem(R.id.menuReset);
-        if(app.donations.isEmpty())
-        {
-            report.setEnabled(false);
-            reset.setEnabled(false);
-        }
-        else {
-            report.setEnabled(true);
-            reset.setEnabled(true);
-        }
+
+        report.setEnabled(true);
+        reset.setEnabled(true);
+
         if(this instanceof Donate){
             donate.setVisible(false);
             if(!app.donations.isEmpty())
